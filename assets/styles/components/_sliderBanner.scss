@@ -1,0 +1,169 @@
+.banner {
+  .slide {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: 0.4s all ease-in;
+    opacity: 0;
+    height: 650px;
+    padding: 100px 50px;
+    
+    &.active,
+    &.style2 {
+      opacity: 1;
+      height: 400px;
+    }
+
+    .containerImg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      
+      img {
+        filter: brightness(50%);
+        width: auto;
+        max-width: none;
+      }
+    }
+
+    .containerInfo {
+      position: absolute;
+      left: 200px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      width: 400px;
+      z-index: 2;
+
+      &.style2 {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transform: none;
+        top: 0;
+        left: 0;
+
+        .subTitle {
+          color: $primary-color-white-10;
+          font-size: 2rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 10px;
+
+          span {
+            width: 120px;
+            text-align: center;
+          }
+
+          .point {
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: $primary-color-white-10;
+            border-radius: 10px;
+          }
+        }
+      }
+
+      .download {
+        width: 40px;
+        margin-top: 20px;
+
+        svg {
+          path {
+            fill: $primary-color-white-10;
+            transition: 0.25s all ease-in;
+          }
+        }
+
+        &:hover {
+          svg {
+            path {
+              fill: $primary-color-white-70;
+            }
+          }
+        }
+      }
+
+      .tagline {
+        font-weight: 500;
+        font-size: 2.5rem;
+        line-height: 38px;
+        color: white;
+      }
+
+      h2 {
+        color: white;
+        line-height: 60px;
+      }
+      
+      .btn {
+        width: max-content;
+        font-size: 1.7rem;
+        padding: 15px 70px;
+        margin-top: 50px;
+      }
+    }
+
+  }
+
+  #containerSlide {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 650px;
+  
+    #slideNav {
+      .nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        cursor: pointer;
+        
+  
+        &.left {
+          left: 20px;
+        }
+    
+        &.right {
+          right: 20px;
+        }
+        
+        svg {
+          width: 50px;
+          height: 50px;
+          
+    
+          path {
+            transition: 0.25s;
+            fill: $primary-color-white-10;
+          }
+        }
+  
+        &:hover {
+          svg {
+            path {
+              fill: $primary-color-white-50;
+            }
+          }
+        }
+      }
+  
+    }
+  }
+}

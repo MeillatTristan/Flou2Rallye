@@ -1,19 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="{% block description %}description{% endblock %}">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('appScss') }}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        
     </head>
     <body>
+        <header class="header">
+            <div class="logo">
+                <a href="{{ path('home') }}"><img src="/assets/images/logo.png" alt="logo"></a>
+            </div>
+            <div class="search" id="searchbar">
+                <div class="loop">
+                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.6185 18L10.3185 11.7C9.81849 12.1 9.24349 12.4167 8.59349 12.65C7.94349 12.8833 7.25183 13 6.51849 13C4.70183 13 3.16449 12.371 1.90649 11.113C0.647827 9.85433 0.0184937 8.31667 0.0184937 6.5C0.0184937 4.68333 0.647827 3.14567 1.90649 1.887C3.16449 0.629 4.70183 0 6.51849 0C8.33516 0 9.87283 0.629 11.1315 1.887C12.3895 3.14567 13.0185 4.68333 13.0185 6.5C13.0185 7.23333 12.9018 7.925 12.6685 8.575C12.4352 9.225 12.1185 9.8 11.7185 10.3L18.0185 16.6L16.6185 18ZM6.51849 11C7.76849 11 8.83116 10.5627 9.70649 9.688C10.5812 8.81267 11.0185 7.75 11.0185 6.5C11.0185 5.25 10.5812 4.18733 9.70649 3.312C8.83116 2.43733 7.76849 2 6.51849 2C5.26849 2 4.20583 2.43733 3.33049 3.312C2.45583 4.18733 2.01849 5.25 2.01849 6.5C2.01849 7.75 2.45583 8.81267 3.33049 9.688C4.20583 10.5627 5.26849 11 6.51849 11Z" fill="#27132B"/>
+                    </svg>
+                </div>
+                {{ form_start(form_search) }}
+                {{ form_widget(form_search.search) }}
+            <button type="submit" id="send_search" class="send btn"><span>Rechercher</span></button>
+                {{ form_end(form_search) }}
+            </div>
+            <div class="containerCta">
+                <a href="{{ path('albums_all') }}" class="btn">
+                    <span>
+                        Découvrir
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21.3334 5.33334C21.3334 6.04059 21.0524 6.71886 20.5523 7.21896C20.0522 7.71906 19.3739 8.00001 18.6667 8.00001H18C17.4696 8.00001 16.9609 8.21072 16.5858 8.5858C16.2107 8.96087 16 9.46958 16 10V10.6667C16 11.0203 15.8595 11.3594 15.6095 11.6095C15.3594 11.8595 15.0203 12 14.6667 12C14.3131 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3334 12.9797 13.3334 13.3333V14.6667C13.3334 15.3739 13.6143 16.0522 14.1144 16.5523C14.6145 17.0524 15.2928 17.3333 16 17.3333H18.6667C19.3739 17.3333 20.0522 17.6143 20.5523 18.1144C21.0524 18.6145 21.3334 19.2928 21.3334 20C21.3334 20.7073 21.6143 21.3855 22.1144 21.8856C22.6145 22.3857 23.2928 22.6667 24 22.6667H25.3334M14.6667 28V24.6667C14.6667 23.5627 13.7534 22.6667 12.6494 22.6667C11.564 22.6667 10.6667 21.7867 10.6667 20.7013C10.6667 20.248 10.5094 19.808 10.2227 19.4573L4.66669 12.6667" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </header>
         {% block body %}{% endblock %}
+        <footer class="footer">
+            <p>© Flou2Rallye | <a href="">Mentions légales</a> | <a href="">Politique de confidentialité</a> | Réalisation de sites Internet, <a href="">MEILLAT Tristan</a></p>
+        </footer>
     </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts_custom %}
+    {% endblock %}
 </html>

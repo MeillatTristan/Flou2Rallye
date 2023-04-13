@@ -1,0 +1,31 @@
+{% macro photoRow(form) %}
+
+<div class="col-lg-12">
+    <div class="collection-list row"  id="containerIdentite"
+         data-prototype="{{ _self.photo(form.vars.prototype)|e('html_attr') }}">
+
+            {% for photo in form %}
+                {{ _self.photo(photo, loop) }}
+            {% endfor %}
+
+
+        <button type="button" id="addIdentite" class="btn btn-round btn-primary add-collection-item {{form.children|length > 0 ? 'mt-4' : ''}}">
+            Ajouter un fichier
+        </button>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro photo(photo, loop) %}
+
+    <div class="collection-item list-group-item photo col-12 col-md-6 col-lg-3">
+         <div class="input-group col-lg-12">
+            {{ form_row(photo.imageFile) }}
+
+        </div>
+        <br>
+        <div class="col-12 previewImg"></div>
+        <button class="btn btn-danger remove-collection-item" type="button">Supprimer</button>
+    </div>
+{% endmacro %}
+

@@ -1,0 +1,91 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+{% import 'admin/form/collection_type.html.twig' as formMacros %}
+
+{% block title %}Hello AdminController!{% endblock %}
+{% block body %}
+
+
+<div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-9 col-xxl-12">
+                    <div class="row containerFormAlbum">
+                        {{ form_start(form) }}
+                        <div class="col-xl-12 col-xxl-12 col-lg-12 col-md-12">
+                          <div class="card">
+                            <div class="card-header album">
+                              {% if app.request.attributes.get('_route') == 'admin_albums_create' %}
+                                <h4 class="card-title">Créer un album</h4>
+                              {% else %}
+                                <h4 class="card-title">Modifier l'album</h4>
+                              {% endif %}
+                              <div class="ctaContainer">
+                                {% if app.request.attributes.get('_route') == 'admin_albums_create' %}
+                                  <input id="btn-create" class="btn btn-primary btn-block" type="submit" value="{{ submitButton | default('Ajouter un album (sauvegarder)') }}" formnovalidate>
+                                {% else %}
+                                  <input id="btn-create" class="btn btn-primary btn-block" type="submit" value="{{ submitButton | default('Modifier l\'album (sauvegarder)') }}" formnovalidate>
+                                  <a href="{{ path('downloadAllImage',{id:album.id }) }}" class="btn btn-secondary btn-block"><i class="fa-solid fa-download"></i> Tout télécharger</a>
+                                {% endif %}
+                              </div>
+                            </div>
+                          
+                            
+                              <div class="card-body">
+                                <div class="basic-form">
+                                  <div class="form-group">
+                                    {{ form_errors(form) }}
+                                  </div>
+                                  <div class="form-group">
+                                    {{ form_label(form.name)}}
+                                    {{ form_widget(form.name)}}
+                                  </div>
+                                  <div class="form-group">
+                                    {{ form_label(form.categories)}}
+                                    <div id="containerCategories"></div>
+                                    <input type="text" id="addCategories" class="form-control"
+                                      {% if album is defined %}
+                                        value="{% for category in categories %}{% if loop.index == categories|length %}{{ category.name }}{% else %}{{ category.name ~ " " }}{% endif %}{% endfor %}"
+                                      {% endif %}
+                                    >
+                                    
+                                    {{ form_widget(form.categories)}}
+                                  </div>
+                                  <div class="form-group">
+                                    {{ form_label(form.private)}}
+                                    {{ form_widget(form.private)}}
+                                  </div>
+                                  <div id="previewPhotos" class="previewPhotos">
+                                    
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="multipleFileIv">
+                                      {{ form_row(form.multipleFile) }}
+                                    </div>
+                                    {{ form_label(form.photos)}}
+                                    {{ formMacros.photoRow(form.photos) }}
+                                  </div>
+                                  {% if app.request.attributes.get('_route') == 'admin_albums_create' %}
+                                    <input id="btn-create" class="btn btn-primary btn-block" type="submit" value="{{ submitButton | default('Ajouter un album') }}" formnovalidate>
+                                  {% else %}
+                                    <input id="btn-create" class="btn btn-primary btn-block" type="submit" value="{{ submitButton | default('Modifier l\'album') }}" formnovalidate>
+                                  {% endif %}
+                                </div>
+                              </div>
+                            
+                          </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block newJS %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/admin/js/multipleFile.js"></script>
+  <script src="/admin/js/gestionCategories.js"></script>
+{% endblock %}

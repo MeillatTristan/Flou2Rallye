@@ -3,18 +3,135 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<section class="banner">
+{% set count = 0 %}
+  <div id="containerSlide">
+    {% for album in albums %}
+      {% if count < 3 %}
+          {% set firstPhoto = album.photos|first %}
+          <div class="slide">
+            <div class="containerImg">
+              <picture>
+                <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('banner_webp') }}" type="image/webp">
+                <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('banner_jpeg') }}" type="image/jpeg"> 
+                <img src="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('banner_jpeg') }}" alt="{{ firstPhoto.imageName }}">
+              </picture>
+            </div>
+            <div class="containerInfo">
+              <span class="tagline">Les derniers albums</span>
+              <h2>{{ album.name }}</h2>
+              <a class="btn" href="{{ path('albums_detail', {'id': album.id}) }}"><span>Voir l'album</span></a>
+            </div>
+          </div>
+      {% endif %}
+      {% set count = count + 1 %}
+      
+    {% endfor %}
+    <div id="slideNav">
+      <div class="nav left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+      </div>
+      <div class="nav right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="container lastAlbums">
+  <h2 class="title">
+    Mes derniers albums
+  </h2>
+  
+  <div class="owl-carousel albums">
+    {% set count = 0 %}
+    {% for album in albums %}
+      {% if count <= 10 %}
+        {% set firstPhoto = album.photos|first %}
+        <a href='{{ path('albums_detail', {'id': album.id}) }}' class="cardAlbum">
+          <div class="effect">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+          </div>
+          <div class="containerImg">
+            <picture>
+              <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_webp') }}" type="image/webp">
+              <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_jpeg') }}" type="image/jpeg"> 
+              <img src="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_jpeg') }}" alt="{{ firstPhoto.imageName }}">
+            </picture>
+            <div class="layer"></div>
+          </div>
+          <div class="info">
+            <h3>{{ album.name }}</h3>
+            <span class="numberPhoto">
+              {{ album.photos|length }} Photos
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.6875 2.1875H1.3125C1.07051 2.1875 0.875 2.38301 0.875 2.625V11.375C0.875 11.617 1.07051 11.8125 1.3125 11.8125H12.6875C12.9295 11.8125 13.125 11.617 13.125 11.375V2.625C13.125 2.38301 12.9295 2.1875 12.6875 2.1875ZM12.1406 10.8281H1.85938V10.2826L3.75293 8.03633L5.80508 10.4699L8.99746 6.68555L12.1406 10.4125V10.8281ZM12.1406 9.05352L9.08086 5.425C9.03711 5.37305 8.95781 5.37305 8.91406 5.425L5.80508 9.11094L3.83633 6.77715C3.79258 6.7252 3.71328 6.7252 3.66953 6.77715L1.85938 8.92363V3.17188H12.1406V9.05352ZM4.15625 6.23438C4.31425 6.23438 4.4707 6.20326 4.61667 6.14279C4.76264 6.08233 4.89527 5.99371 5.00699 5.88199C5.11871 5.77027 5.20733 5.63764 5.26779 5.49167C5.32826 5.3457 5.35938 5.18925 5.35938 5.03125C5.35938 4.87325 5.32826 4.7168 5.26779 4.57083C5.20733 4.42486 5.11871 4.29223 5.00699 4.18051C4.89527 4.06879 4.76264 3.98017 4.61667 3.91971C4.4707 3.85924 4.31425 3.82812 4.15625 3.82812C3.83716 3.82812 3.53114 3.95488 3.30551 4.18051C3.07988 4.40614 2.95312 4.71216 2.95312 5.03125C2.95312 5.35034 3.07988 5.65636 3.30551 5.88199C3.53114 6.10762 3.83716 6.23438 4.15625 6.23438ZM4.15625 4.64844C4.36816 4.64844 4.53906 4.81934 4.53906 5.03125C4.53906 5.24316 4.36816 5.41406 4.15625 5.41406C3.94434 5.41406 3.77344 5.24316 3.77344 5.03125C3.77344 4.81934 3.94434 4.64844 4.15625 4.64844Z" fill="#F3ECF4"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      {% endif %}
+      {% set count = count + 1 %}
+    {% endfor %}
+    <a href="{{ path('albums_all') }}" class="lastCardAlbum">
+      Découvrir tous les albums 
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+    </a>
+  </div>
+</section>
+<section class="container bandContact">
+  <div class="containerBackground">
+    <h2>Vous souhaitez me contacter ?</h2>
+    <h3>Je vous répondrais dans les plus bref délais</h3>
+    <a href="#" class="btn style2"><span>Me contacter</span></a>
+  </div>
+</section>
+<section class="container lastAlbums">
+  <h2 class="title">
+    Mes albums les plus populaire
+  </h2>
+  
+  <div class="owl-carousel albums">
+    {% set count = 0 %}
+    {% for album in albums|sort((a, b) => a.save <=> b.save)|reverse %}
+      {% if count <= 10 %}
+        {% set firstPhoto = album.photos|first %}
+        <a href='{{ path('albums_detail', {'id': album.id}) }}' class="cardAlbum">
+          <div class="effect">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+          </div>
+          <div class="containerImg">
+            <picture>
+              <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_webp') }}" type="image/webp">
+              <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_jpeg') }}" type="image/jpeg"> 
+              <img src="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_jpeg') }}" alt="{{ firstPhoto.imageName }}">
+            </picture>
+            <div class="layer"></div>
+          </div>
+          <div class="info">
+            <h3>{{ album.name }}</h3>
+            <span class="numberPhoto">
+              {{ album.photos|length }} Photos
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.6875 2.1875H1.3125C1.07051 2.1875 0.875 2.38301 0.875 2.625V11.375C0.875 11.617 1.07051 11.8125 1.3125 11.8125H12.6875C12.9295 11.8125 13.125 11.617 13.125 11.375V2.625C13.125 2.38301 12.9295 2.1875 12.6875 2.1875ZM12.1406 10.8281H1.85938V10.2826L3.75293 8.03633L5.80508 10.4699L8.99746 6.68555L12.1406 10.4125V10.8281ZM12.1406 9.05352L9.08086 5.425C9.03711 5.37305 8.95781 5.37305 8.91406 5.425L5.80508 9.11094L3.83633 6.77715C3.79258 6.7252 3.71328 6.7252 3.66953 6.77715L1.85938 8.92363V3.17188H12.1406V9.05352ZM4.15625 6.23438C4.31425 6.23438 4.4707 6.20326 4.61667 6.14279C4.76264 6.08233 4.89527 5.99371 5.00699 5.88199C5.11871 5.77027 5.20733 5.63764 5.26779 5.49167C5.32826 5.3457 5.35938 5.18925 5.35938 5.03125C5.35938 4.87325 5.32826 4.7168 5.26779 4.57083C5.20733 4.42486 5.11871 4.29223 5.00699 4.18051C4.89527 4.06879 4.76264 3.98017 4.61667 3.91971C4.4707 3.85924 4.31425 3.82812 4.15625 3.82812C3.83716 3.82812 3.53114 3.95488 3.30551 4.18051C3.07988 4.40614 2.95312 4.71216 2.95312 5.03125C2.95312 5.35034 3.07988 5.65636 3.30551 5.88199C3.53114 6.10762 3.83716 6.23438 4.15625 6.23438ZM4.15625 4.64844C4.36816 4.64844 4.53906 4.81934 4.53906 5.03125C4.53906 5.24316 4.36816 5.41406 4.15625 5.41406C3.94434 5.41406 3.77344 5.24316 3.77344 5.03125C3.77344 4.81934 3.94434 4.64844 4.15625 4.64844Z" fill="#F3ECF4"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      {% endif %}
+      {% set count = count + 1 %}
+    {% endfor %}
+    <a href="{{ path('albums_all') }}" class="lastCardAlbum">
+      Découvrir tous les albums 
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+    </a>
+  </div>
+</section>
+{% endblock %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/flou2Rallye/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/flou2Rallye/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block javascripts_custom %}
+
+{{ encore_entry_script_tags('home') }}
 {% endblock %}

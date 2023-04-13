@@ -1,0 +1,136 @@
+#btn-update,#btn-create,
+.btn-primary {
+    background-color: #823e91;
+    border-color: #823e91;
+
+}
+#btn-create:hover,
+.btn-primary:hover {
+    background-color: #51275c;
+    border-color: #51275c;
+
+}
+#btn-create:active,
+.btn-primary:active {
+    background-color: #51275c;
+    border-color: #51275c;
+
+}
+
+#btn-update:hover {
+    background-color: #51275c;
+    border-color: #51275c;
+
+}
+#btn-update:active {
+    background-color: #51275c;
+    border-color: #51275c;
+
+}
+
+#btn-delete {
+    background-color: #FD6621;
+    border-color:#FD6621 ;
+}
+
+#btn-delete:hover {
+    background-color: #f05813;
+}
+
+#btn-delete:active {
+    background-color: #db4804;
+}
+
+
+#avantages legend{
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    margin-bottom: 19px;
+    color: var(--thm-base);
+}
+
+#avantages #outil_avantages fieldset.form-group, #avantages .avantageGroupInput{
+     padding: 20px;
+     margin: 20px;
+     border: solid 2px #d7dae3;
+}
+
+#avantages .inputIcon{
+    width: 50%;
+    display: inline;
+}
+
+#avantages i{
+    font-size: 20px;
+    margin-left: 7px;
+}
+
+#avantages .ajout-avantage{
+    margin-bottom: 25px;
+}
+
+#avantages #outil_avantages fieldset.form-group legend{
+    display: none;
+}
+
+
+.bi-plus-circle{
+    transition: transform 0.3s ease-out;
+}
+.bi-plus-circle:hover {
+    transform: scale(1.075);
+}
+
+#btn-index svg:hover {
+    fill: #f05813;
+}
+
+#btn-index svg:active {
+    fill: #db4804;
+}
+
+
+
+
+
+.bi-eye {
+    transition: transform 0.3s ease-out;
+
+}
+
+.bi-eye:hover {
+    transform: scale(1.075);
+}
+
+.previewPhotos {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.previewPhotos .containerImg {
+    max-width: 15%;
+    min-width: 100px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+}
+
+.previewPhotos .containerImg img {
+    max-width: 100%;
+    height: auto;
+}
+
+.previewPhotos .containerImg .description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.61);
+    color: white;
+    text-align: center;
+}
+

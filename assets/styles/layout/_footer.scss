@@ -1,0 +1,22 @@
+.footer {
+  padding: 50px 150px;
+  background: url(../../images/shapes/footer-shape.png), $primary-color;
+  background-size: cover;
+  background-position: center;
+
+  p {
+    color: $primary-color-white-10;
+    font-size: 1.6rem;
+
+    a {
+      color: $primary-color-white-10;
+      font-size: 1.6rem;
+      transition: 0.25s;
+      font-weight: 600;
+
+      &:hover {
+        color: $primary-color-white-20;
+      }
+    }
+  }
+}

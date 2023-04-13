@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+{% set firstPhoto = album.photos|first %}
+<section class="banner">
+  <div id="containerSlide" class="style2">
+    <div class="slide style2">
+      <div class="containerImg">
+        <picture>
+          <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('banner_style2_webp') }}" type="image/webp">
+          <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('banner_style2_jpeg') }}" type="image/jpeg"> 
+          <img src="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('banner_style2_jpeg') }}" alt="{{ firstPhoto.imageName }}">
+        </picture>
+      </div>
+      <div class="containerInfo style2">
+        <h2>{{ album.name }}</h2>
+        <div class="subTitle">
+          <span>{{ album.photos|length }} photos</span>
+          <span class="point"></span>
+          <span>{{ album.view }} vues</span>
+        </div>
+        <a href="{{ path('downloadAllImage', {'id': album.id}) }}" class="download">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="container">
+
+</section>
+
+{% endblock %}
+
+{% block javascripts_custom %}
+
+{% endblock %}

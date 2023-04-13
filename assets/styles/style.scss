@@ -1,0 +1,15 @@
+@import "./utils/variables";
+@import "./base/rooting";
+@import "./layout/header";
+@import "./layout/footer";
+@import "./components/searchbar";
+@import "./components/btn";
+@import "./components/sliderBanner";
+@import "./components/title";
+@import "./components/cardAlbum";
+@import "./components/bandContact";
+@import "./components/filters";
+@import "./components/pagination";
+@import "./pages/albumsContainer";
+@import "../../node_modules/owl.carousel/dist/assets/owl.carousel.min.css";
+@import "../../node_modules/owl.carousel/dist/assets/owl.theme.default.css";

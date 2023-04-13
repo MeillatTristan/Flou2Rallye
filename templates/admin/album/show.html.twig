@@ -1,0 +1,95 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Albums{% endblock %}
+
+{% block body %}
+    {% for album in albums %}
+    {% endfor %}
+
+    <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-9 col-xxl-12">
+                    <div class="row">
+
+                        <div class="col-xl-12 col-xxl-12 col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header border-0 pb-0">
+                                    <h4 class="card-title">Albums</h4>
+                                    <div class="input-group rounded col-md-2">
+
+                                        <input id="myInput3"  onkeyup="myFunction('myTBODY3','myInput3')" class="form-control border-start" type="search" placeholder="Rechercher" aria-label="Search">
+
+                                    </div>
+                                </div>
+
+
+                                <div class="card-header border-0 pb-2">
+                                    <a id="btn-create" class="btn btn-success btn-block" type="button" href="{{ path('admin_albums_create') }}"> Nouvel Album</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-responsive-sm mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th><strong>NOM DE L'ALBUM</strong></th>
+                                                <th><strong>PRIVÉ</strong></th>
+
+                                                <th style="width:120px;"><strong>ACTIONS</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="myTBODY3">
+                                            {% for album in albums %}
+                                                <tr>
+
+                                                    <td><b>{{  album.name | capitalize}}</b></td>
+
+                                                    {% if album.private %}
+                                                        <td class="recent-stats d-flex align-items-center"><i class="fa fa-circle text-warning mr-1"></i>Privé</td>
+                                                        
+                                                    {% else %}
+                                                        <td class="recent-stats d-flex align-items-center"><i class="fa fa-circle text-success mr-1"></i>En ligne</td>
+                                                    {% endif %}
+
+                                                    <td>
+
+
+                                                            {# {# <a id="btn-update" href="{{ path('app_outils_update',{id:outil.id}) }}" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-hand-o-up"></i></a> #}
+
+                                                            <a id="btn-update" href="{{ path('admin_albums_modify',{id:album.id }) }}" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+
+
+                                                            {# <a id="btn-delete" href="#" onclick="event.preventDefault();confirm('Are you sure ?') &&
+                                                         document.getElementById('js-outil-delete-form-{{outil.id}}').submit();" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a> #}
+
+
+                                                            {# <form id="js-outil-delete-form-{{outil.id}}" action="{{ path('app_outils_delete',{id:outil.id }) }}" method="post" style="display:none;">
+                                                                <input type="hidden" name="csrf_token" value="{{ csrf_token('outil_deletion_'~ outil.id)}}">
+                                                                <input type="hidden" name="method" value="DELETE">
+                                                            </form> #}
+
+
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

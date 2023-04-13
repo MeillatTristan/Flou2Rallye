@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Flou2Rallye -  Admin Dashboard </title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/images/favicon-lagence-expert.png') }}">
+    <link href="{{ asset('admin/vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('admin/vendor/chartist/css/chartist.min.css') }}">
+    <link href="{{ asset('admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<!--*******************
+    Preloader start
+********************-->
+<div id="preloader">
+    <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+    </div>
+</div>
+<!--*******************
+    Preloader end
+********************-->
+
+<!--**********************************
+    Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+
+    <!--**********************************
+        Nav header start
+    ***********************************-->
+
+    <div class="nav-header" style="background-color: #fff">
+        <a href="{{ path('admin_index') }}" class="brand-logo">
+            <img class="logo-abbr" src="{{ asset('/assets/images/logoMinimal.png') }}" alt=""/>
+
+        </a>
+
+        <div class="nav-control">
+            <div class="hamburger">
+                <span class="line"></span><span class="line"></span><span class="line"></span>
+            </div>
+        </div>
+    </div>
+
+    <!--**********************************
+        Nav header end
+    ***********************************-->
+
+    <!--**********************************
+        Sidebar Fixed
+    ***********************************-->
+    <!--**********************************
+        Sidebar End
+    ***********************************-->
+
+
+    <!--**********************************
+        Header start
+    ***********************************-->
+    {{ include('admin/admin_home/layouts/partials/header.html.twig') }}
+    <!--**********************************
+        Header end ti-comment-alt
+    ***********************************-->
+
+    <!--**********************************
+        Sidebar start
+    ***********************************-->
+    {{ include('admin/admin_home/layouts/partials/sidebar-dynamic.html.twig') }}
+    <!--**********************************
+        Sidebar end
+    ***********************************-->
+
+    <!--**********************************
+        Content body start
+    ***********************************-->
+
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+        {% block body %}
+
+        {% endblock %}
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    {{ include('admin/admin_home/layouts/partials/footer.html.twig') }}
+    <!--**********************************
+        Footer end
+    ***********************************-->
+
+    <!--**********************************
+       Support ticket button start
+    ***********************************-->
+
+    <!--**********************************
+       Support ticket button end
+    ***********************************-->
+
+
+</div>
+<!--**********************************
+    Main wrapper end
+***********************************-->
+
+<!--**********************************
+    Scripts
+***********************************-->
+<!-- Required vendors -->
+
+{% block javascripts %}
+    <script src="{{ asset('admin/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/js/custom.min.js') }}"></script>
+    <!-- Apex Chart -->
+    <script src="{{ asset('admin/vendor/apexchart/apexchart.js') }}"></script>
+
+    <!-- Vectormap -->
+    <!-- Chart piety plugin files -->
+    <script src="{{ asset('admin/vendor/peity/jquery.peity.min.js') }}"></script>
+
+    <!-- Chartist -->
+    <script src="{{ asset('admin/vendor/chartist/js/chartist.min.js') }}"></script>
+
+    <!-- Dashboard 1 -->
+    <script src="{{ asset('admin/js/dashboard/dashboard-1.js') }}"></script>
+
+    <!-- Svganimation scripts -->
+    <script src="{{ asset('admin/vendor/svganimation/vivus.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/svganimation/svg.animation.js') }}"></script>
+    <script src="{{ asset('admin/js/custom.js') }}"></script>
+    <script src="{{ asset('admin/js/customSearch.js') }}"></script>
+    <script src="{{ asset('admin/js/collection_form.js') }}"></script>
+
+
+
+    <script>
+        (function($) {
+            "use strict"
+
+            var direction =  getUrlParams('dir');
+            if(direction != 'rtl')
+            {direction = 'ltr'; }
+
+            new dezSettings({
+                typography: "roboto",
+                version: "light",
+                layout: "vertical",
+                headerBg: "color_1",
+                navheaderBg: "color_3",
+                sidebarBg: "color_1",
+                sidebarStyle: "mini",
+                sidebarPosition: "fixed",
+                headerPosition: "fixed",
+                containerLayout: "wide",
+                direction: direction
+            });
+
+        })(jQuery);
+    </script>
+
+
+
+
+{% endblock %}
+{% block newJS %}{% endblock %}
+</body>
+</html>
