@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{ album.name }} | Flou2Rallye{% endblock %}
+{% block Description %} Retrouvez les photos de l'album {{ album.name }}  {% endblock %}
 
 {% block body %}
 {% set firstPhoto = album.photos|first %}
@@ -29,11 +30,130 @@
   </div>
 </section>
 <section class="container">
-
+  <h2 class="title">
+    Photos de l'album {{album.name}}
+  </h2>
+  <button id="openComment" class="btn">
+    <span>
+      <i class="fa-solid fa-comment"></i>
+      Commentaires de l'album
+    </span>
+  </button>
+  <div class="cardsContainer">
+    {% for photo in album.photos %}
+      <div class="cardAlbum" data-id="{{ loop.index }}">
+        <div class="containerImg">
+          <picture>
+            <source srcset="{{ vich_uploader_asset(photo, 'imageFile')| imagine_filter('card_album_webp') }}" type="image/webp">
+            <source srcset="{{ vich_uploader_asset(photo, 'imageFile')| imagine_filter('card_album_jpeg') }}" type="image/jpeg"> 
+            <img src="{{ vich_uploader_asset(photo, 'imageFile')| imagine_filter('card_album_jpeg') }}" alt="{{ photo.imageName }}">
+          </picture>
+          <div class="layer"></div>
+        </div>
+        <div class="info">
+          <a href="{{ path('downloadOneImage', {'id': photo.id}) }}" class="subInfo download">
+            Télécharger
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 </section>
+
+<div id="carouselPhoto" class="carouselPhoto">
+  <div class="containerData">
+    {% for photo in album.photos %}
+      <picture>
+        <source srcset="{{ vich_uploader_asset(photo, 'imageFile')| imagine_filter('convert_webp') }}" type="image/webp">
+        <source srcset="{{ vich_uploader_asset(photo, 'imageFile')| imagine_filter('convert_jpeg') }}" type="image/jpeg"> 
+        <img id="data{{ loop.index }}" data-id="{{ loop.index }}" class="dataPhoto" src="{{ vich_uploader_asset(photo, 'imageFile')| imagine_filter('convert_jpeg') }}" alt="{{ photo.imageName }}">
+      </picture>
+    {% endfor %}
+  </div>
+  <div class="containerPhoto">
+    <img id="imgPlacehold" data-id="1" src="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('convert_jpeg') }}" alt="{{ firstPhoto.imageName }}">
+    <div id="slideNav">
+      <div id="navLeft" class="nav left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+      </div>
+      <div id="navRight" class="nav right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+      </div>
+      <div id="closeLigthbox" class="close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="containerComments" class="{% if formCommentSend == true %}active{% endif %}">
+  <div class="layer" id="layerComment"></div>
+  <div class="content container">
+    {% if formCommentSend == true %}
+      <div class="success">
+        <p>Votre commentaire a été posté, merci !</p>
+      </div>
+    {% endif %}
+    
+    <div id="closeComment" class="close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+    </div>
+    <div class="containerFlex">
+      <div class="comments">
+        <h2 class="title">Commentaires</h2>
+        {% if comments|length <= 0 %}
+          <div class="noComment">
+            <p>Personne n'a encore commenté cet album, soyez le premier !</p>
+          </div>
+        {% else %}
+          {% for comment in comments %}
+            <div class="comment">
+              <div class="left">
+                <div class="avatar">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+              </div>
+              <div class="right">
+                <div class="info">
+                  {{ comment.name }} | <span class="date">{{ comment.createdAt|date('d-m-Y h:i') }}</span>
+                </div>
+                <div class="message">
+                  {{ comment.message }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+        
+      </div>
+      <div class="formComment">
+        <h2 class="title">Ajouter un commentaire</h2>
+        {{ form_start(formComment) }}
+        
+          {% if not formComment.vars.valid %}
+            <div class="errors">
+              {{ form_errors(formComment.name) }}
+              {{ form_errors(formComment.message) }}
+              {{ form_widget(formComment.captcha) }}
+            </div>
+          {% endif %}
+          {{ form_widget(formComment.name) }}
+          {{ form_widget(formComment.message) }}
+          <button type="submit" class="btn submit">
+              <span>
+                  Envoyer mon message
+              </span>
+          </button>
+        {{ form_end(formComment) }}
+      </div>
+    </div>
+  </div>
+
+</div>
 
 {% endblock %}
 
 {% block javascripts_custom %}
-
+  {{ encore_entry_script_tags('detailAlbum') }}
 {% endblock %}

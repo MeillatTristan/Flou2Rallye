@@ -1,0 +1,142 @@
+.carouselPhoto {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%) scale(0%);
+  background-color: #21002900;
+  z-index: 3;
+  transition: 0.25s all ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.active {
+    top: 0%;
+    left: 0%;
+    background-color: #0c000fe1;
+    transform: translate(0%) scale(100%)
+  }
+
+  .containerPhoto {
+    max-width: 80%;
+    max-height: 80%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  .containerData {
+    display: none;
+  }
+
+  #slideNav {
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      cursor: pointer;
+      
+
+      &.left {
+        left: 20px;
+      }
+  
+      &.right {
+        right: 20px;
+      }
+      
+      svg {
+        width: 50px;
+        height: 50px;
+        
+  
+        path {
+          transition: 0.25s;
+          fill: $primary-color-white-10;
+        }
+      }
+
+      @media screen and (max-width: 650px) {
+
+        height: 100%;
+        display: flex;
+        width: 30%;
+        align-items: center;
+        top: 0;
+        transform: none;
+
+        &.left {
+          left: 10px;
+          justify-content: flex-start;
+        }
+    
+        &.right {
+          right: 10px;
+          justify-content: flex-end;
+        }
+
+        svg {
+          width: 30px;
+          height: 30px;
+        }
+
+      }
+
+      @media screen and (max-width: 400px) {
+        &.left {
+          left: 0px;
+        }
+    
+        &.right {
+          right: 0px;
+        }
+      }
+
+      &:hover {
+        svg {
+          path {
+            fill: $primary-color-white-50;
+          }
+        }
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      z-index: 3;
+
+      svg {
+        width: 50px;
+        height: 50px;
+
+        path {
+          transition: 0.25s;
+          fill: $primary-color-white-10;
+        }
+      }
+
+      &:hover {
+        svg {
+          path {
+            fill: $primary-color-white-50;
+          }
+        }
+      }
+    }
+  }
+}

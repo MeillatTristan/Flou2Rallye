@@ -1,0 +1,70 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+
+
+    <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-9 col-xxl-12">
+                    <div class="row">
+
+                        <div class="col-xl-12 col-xxl-12 col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header border-0 pb-0">
+                                    <h4 class="card-title">Messages</h4>
+                                    <div class="input-group rounded col-md-2">
+
+                                        <input id="myInput3"  onkeyup="myFunction('myTBODY3','myInput3')" class="form-control border-start" type="search" placeholder="Rechercher" aria-label="Search">
+
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-responsive-sm mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th><strong>Nom</strong></th>
+                                                <th><strong>Email</strong></th>
+                                                <th><strong>Date</strong></th>
+
+                                                <th style="width:120px;"><strong>ACTIONS</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="myTBODY3">
+                                            {% for message in messages %}
+                                                <tr>
+
+                                                    <td><b>{{  message.name | capitalize}}</b></td>
+                                                    <td><b>{{  message.email}}</b></td>
+                                                    <td><b>{{  message.createdAt|date('d/m/Y H:i')}}</b></td>
+
+                                                    <td>
+                                                      <a id="btn-update" href="{{ path('admin_messages_show', {id: message.id}) }}" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa-solid fa-eye"></i></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

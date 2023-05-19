@@ -45335,6 +45335,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   gap: 10px;
   margin-bottom: 20px;
   min-height: 31px;
+  flex-wrap: wrap;
 }
 
 #containerCategories .category {

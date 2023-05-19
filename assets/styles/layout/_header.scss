@@ -13,6 +13,11 @@
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   z-index: 3;
 
+  @media screen and (max-width: 500px) {
+    padding: 25px 20px;
+    gap: 20px;
+  }
+
   .logo {
     height: 100%;
 
@@ -20,6 +25,20 @@
       height: 100%;
       display: flex;
       align-items: center;
+
+      .mobile {
+        display: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        .mobile {
+          display: block;
+        }
+
+        .desktop {
+          display: none;
+        }
+      }
     }
   }
 
@@ -28,6 +47,12 @@
   }
 
   .containerCta {
+    min-width: 250px;
+
+    @media screen and (max-width: 992px) {
+      display: none;
+    }
+
     .btn {
       span {
         gap: 10px;

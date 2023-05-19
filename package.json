@@ -22,6 +22,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "exifr": "^7.1.3",
         "jquery": "^3.6.4",
         "owl.carousel": "^2.3.4"
     }

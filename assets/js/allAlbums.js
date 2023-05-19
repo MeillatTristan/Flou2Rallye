@@ -1,13 +1,13 @@
 
 if (document.getElementById('paginationContainer')) {
 
-  duplicateChildNodes('albumsContainer')
-  duplicateChildNodes('albumsContainer')
-  duplicateChildNodes('albumsContainer')
-  duplicateChildNodes('albumsContainer')
-  duplicateChildNodes('albumsContainer')
-  duplicateChildNodes('albumsContainer')
-  duplicateChildNodes('albumsContainer')
+  // duplicateChildNodes('cardsContainer')
+  // duplicateChildNodes('cardsContainer')
+  // duplicateChildNodes('cardsContainer')
+  // duplicateChildNodes('cardsContainer')
+  // duplicateChildNodes('cardsContainer')
+  // duplicateChildNodes('cardsContainer')
+  // duplicateChildNodes('cardsContainer')
   var sendSearch = document.getElementById('send_search');
   var selectNumberCardsDisplay = document.getElementById('filterNumber');
   var selectFilter = document.getElementById('filter');
@@ -43,7 +43,7 @@ if (document.getElementById('paginationContainer')) {
   }
 
   inputSearch.addEventListener('keyup', (e) => {
-    const searchValue = inputSearch.value.toLowerCase().replace(/\./g, '');
+    const searchValue = inputSearch.value.toLowerCase().replace(/\./g, '').trim();
     search(searchValue);
   })
 

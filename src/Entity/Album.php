@@ -41,12 +41,16 @@ class Album
     #[ORM\Column(options: ["default" => 0], nullable: true)]
     private ?int $view = null;
 
+    #[ORM\OneToMany(mappedBy: 'album', targetEntity: CommentAlbum::class)]
+    private Collection $commentAlbums;
+
 
 
     public function __construct()
     {
         $this->photos = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->commentAlbums = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +159,36 @@ class Album
     public function setView(float $view): self
     {
         $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentAlbum>
+     */
+    public function getCommentAlbums(): Collection
+    {
+        return $this->commentAlbums;
+    }
+
+    public function addCommentAlbum(CommentAlbum $commentAlbum): self
+    {
+        if (!$this->commentAlbums->contains($commentAlbum)) {
+            $this->commentAlbums->add($commentAlbum);
+            $commentAlbum->setAlbum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentAlbum(CommentAlbum $commentAlbum): self
+    {
+        if ($this->commentAlbums->removeElement($commentAlbum)) {
+            // set the owning side to null (unless already changed)
+            if ($commentAlbum->getAlbum() === $this) {
+                $commentAlbum->setAlbum(null);
+            }
+        }
 
         return $this;
     }

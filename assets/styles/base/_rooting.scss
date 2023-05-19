@@ -11,6 +11,10 @@
 
 html{
   font-size: 10px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 9px;
+  }
 }
 
 body {
@@ -27,9 +31,28 @@ img{
 h2 {
   font-weight: 700;
   font-size: 5rem;
+  
+  @media screen and (max-width: 768px) {
+    font-size: 4rem;
+  }
 }
 
 .container {
   padding: 0 150px;
   padding-top: 150px;
+
+  @media screen and (max-width: 1200px) {
+    padding: 0 100px;
+    padding-top: 150px;
+  }
+
+  @media screen and (max-width: 992px) {
+    padding: 0 50px;
+    padding-top: 150px;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0 10px;
+    padding-top: 100px;
+  }
 }

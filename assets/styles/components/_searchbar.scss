@@ -41,6 +41,10 @@
     transition: 0.25s all ease;
     height: auto;
     border-radius: 95px;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   &.active {

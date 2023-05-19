@@ -3,14 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Entity\CommentAlbum;
+use App\Entity\Contact;
 use App\Entity\Photos;
 use App\Entity\User;
+use App\Form\CommentAlbumType;
+use App\Form\ContactFormType;
 use App\Repository\AlbumRepository;
 use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -108,16 +115,79 @@ class HomeController extends AbstractFrontController
     }
 
     #[Route('/albums/detail/{id}', name: 'albums_detail')]
-    public function detailAlbum(Album $album, EntityManagerInterface $em): Response
+    public function detailAlbum(Request $request, Album $album, EntityManagerInterface $em): Response
     {
         $album->setView($album->getView() + 1);
         $em->persist($album);
         $em->flush();
 
+        $comments = $album->getCommentAlbums();
+
+        $commentNew = new CommentAlbum;
+        $commentForm = $this->createForm(CommentAlbumType::class, $commentNew);
+
+        $form_send = false;
+
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $commentNew->setCreatedAt(new DateTime('now'));
+            $commentNew->setUpdatedAt(new DateTime('now'));
+            $commentNew->setAlbum($album);
+            $em->persist($commentNew);
+            $em->flush();
+            //TODO SEND EMAIL
+            $form_send = true;
+        }
+
         return $this->render('home/albumDetail.html.twig', [
             'controller_name' => 'HomeController',
             'album' => $album,
-            'numberView' => $album->getView()
+            'numberView' => $album->getView(),
+            'formComment' => $commentForm,
+            'formCommentSend' => $form_send,
+            'comments' => $comments
+        ]);
+    }
+
+    #[Route('/contact', name: 'contact')]
+    public function contact(Request $request, EntityManagerInterface $em, Recaptcha3Validator $recaptcha3Validator): Response
+    {
+        $contact = new Contact;
+        $contactForm = $this->createForm(ContactFormType::class, $contact);
+        $form_send = false;
+
+
+        $contactForm->handleRequest($request);
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+            $contact->setCreatedAt(new DateTime('now'));
+            $contact->setUpdatedAt(new DateTime('now'));
+            $em->persist($contact);
+            $em->flush();
+            //TODO SEND EMAIL
+            $form_send = true;
+        }
+
+        return $this->render('home/contact.html.twig', [
+            'controller_name' => 'HomeController',
+            'form'=> $contactForm,
+            'form_send' => $form_send
+        ]);
+    }
+
+    #[Route('/mentions-legales', name: 'mentions-legales')]
+    public function mentionsLegales(): Response
+    {
+        return $this->render('home/mentionsLegales.html.twig', [
+            'controller_name' => 'HomeController'
+        ]);
+    }
+
+    #[Route('/politique-confidentialite', name: 'politique-confidentialite')]
+    public function politiqueConfidentialite(): Response
+    {
+        return $this->render('home/politiqueConfidentialite.html.twig', [
+            'controller_name' => 'HomeController'
         ]);
     }
 }

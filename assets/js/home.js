@@ -14,12 +14,15 @@ $(document).ready(function(){
     autoplayHoverPause:false,
     responsive:{
         0:{
-            items:1
+            items: 1
         },
-        600:{
+        762:{
+            items:2
+        },
+        900:{
             items:3
         },
-        1000:{
+        1400:{
             items:4
         }
     }

@@ -1,8 +1,16 @@
 .title {
   padding-bottom: 50px;
-  font-size: 40px;
+  font-size: 4rem;
   position: relative;
   width: max-content;
+
+  @media screen and (max-width: 500px) {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 2.5rem;
+  }
 
   &::after {
     content: "";

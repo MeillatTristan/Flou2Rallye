@@ -60,3 +60,11 @@ liip_imagine:
 
             filters:
                 thumbnail: { size: [250, 250], mode: outbound }
+        
+        convert_webp:
+            format: webp
+            quality: 80
+
+        convert_jpeg:
+            format: jpeg
+            quality: 80

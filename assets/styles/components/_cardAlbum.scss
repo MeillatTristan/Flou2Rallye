@@ -7,7 +7,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   transition: 0.3s;
-  
+  cursor: pointer;
 
   .effect {
     .line {
@@ -46,7 +46,7 @@
       transition: 0.25s;
     }
 
-    .numberPhoto {
+    .subInfo {
       color: white;
       display: flex;
       align-items: center;
@@ -60,6 +60,20 @@
       svg {
         width: 24px;
         height: auto;
+        transition: 0.25s;
+
+        path {
+          fill: white;
+          transition: 0.25s;
+        }
+      }
+
+      &.download:hover {
+        color: $primary-color-white-50;
+
+        svg path {
+          fill: $primary-color-white-50;
+        }
       }
     }
   }
@@ -99,7 +113,7 @@
 
     .info {
       h3,
-      .numberPhoto {
+      .subInfo {
         transform: translateY(0);
       }
     }
@@ -136,5 +150,13 @@
   &:hover {
     transform: translateY(-10px);
     background-color: $primary-color-black-80;
+  }
+}
+
+.owl-carousel.albums .owl-item {
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

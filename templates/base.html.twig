@@ -2,9 +2,10 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="description" content="{% block description %}description{% endblock %}">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -16,7 +17,10 @@
     <body>
         <header class="header">
             <div class="logo">
-                <a href="{{ path('home') }}"><img src="/assets/images/logo.png" alt="logo"></a>
+                <a href="{{ path('home') }}">
+                    <img class="desktop" src="/assets/images/logo.png" alt="logo">
+                    <img class="mobile" src="/assets/images/logoMinimal.png" alt="logo">
+                </a>
             </div>
             <div class="search" id="searchbar">
                 <div class="loop">
@@ -32,7 +36,7 @@
             <div class="containerCta">
                 <a href="{{ path('albums_all') }}" class="btn">
                     <span>
-                        Découvrir
+                        Découvrir mes albums
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M21.3334 5.33334C21.3334 6.04059 21.0524 6.71886 20.5523 7.21896C20.0522 7.71906 19.3739 8.00001 18.6667 8.00001H18C17.4696 8.00001 16.9609 8.21072 16.5858 8.5858C16.2107 8.96087 16 9.46958 16 10V10.6667C16 11.0203 15.8595 11.3594 15.6095 11.6095C15.3594 11.8595 15.0203 12 14.6667 12C14.3131 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3334 12.9797 13.3334 13.3333V14.6667C13.3334 15.3739 13.6143 16.0522 14.1144 16.5523C14.6145 17.0524 15.2928 17.3333 16 17.3333H18.6667C19.3739 17.3333 20.0522 17.6143 20.5523 18.1144C21.0524 18.6145 21.3334 19.2928 21.3334 20C21.3334 20.7073 21.6143 21.3855 22.1144 21.8856C22.6145 22.3857 23.2928 22.6667 24 22.6667H25.3334M14.6667 28V24.6667C14.6667 23.5627 13.7534 22.6667 12.6494 22.6667C11.564 22.6667 10.6667 21.7867 10.6667 20.7013C10.6667 20.248 10.5094 19.808 10.2227 19.4573L4.66669 12.6667" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -43,7 +47,7 @@
         </header>
         {% block body %}{% endblock %}
         <footer class="footer">
-            <p>© Flou2Rallye | <a href="">Mentions légales</a> | <a href="">Politique de confidentialité</a> | Réalisation de sites Internet, <a href="">MEILLAT Tristan</a></p>
+            <p>© Flou2Rallye | <a href="{{ path('mentions-legales') }}">Mentions légales</a> | <a href="{{ path('politique-confidentialite') }}">Politique de confidentialité</a> | Réalisation de sites Internet, <a target="_blank" href="https://www.linkedin.com/in/tristan-meillat-3b6845194/">MEILLAT Tristan</a></p>
         </footer>
     </body>
     {% block javascripts %}

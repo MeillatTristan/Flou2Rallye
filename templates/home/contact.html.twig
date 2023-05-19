@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+  <section class="contact">
+    <div class="containerForm">
+      <div class="content">
+        <h2 class="title">Me contacter</h2>
+        {{ form_start(form) }}
+          {% if form_send == true %}
+            <div class="success">
+              <p>Votre message a été envoyé, je vous répondrais dans les plus bref délais</p>
+            </div>
+          {% endif %}
+          {% if not form.vars.valid %}
+            <div class="errors">
+              {{ form_errors(form.name) }}
+              {{ form_errors(form.email) }}
+              {{ form_errors(form.message) }}
+              {{ form_widget(form.captcha) }}
+            </div>
+          {% endif %}
+          {{ form_widget(form.name) }}
+          {{ form_widget(form.email) }}
+          {{ form_widget(form.message) }}
+          <button type="submit" class="btn submit">
+              <span>
+                  Envoyer mon message
+              </span>
+          </button>
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+    <div class="containerImg" style="background-image: url(https://placehold.jp/1920x900.png)">
+    
+    </div>
+  </section>
+{% endblock %}
+
+{% block javascripts_custom %}
+
+{% endblock %}

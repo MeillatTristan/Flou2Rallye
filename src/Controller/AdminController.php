@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Album;
 use App\Entity\Category;
+use App\Entity\Contact;
 use App\Entity\Photos;
 use App\Entity\User;
 use App\Form\AlbumType;
 use App\Form\UserType;
 use App\Repository\AlbumRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -153,6 +155,23 @@ class AdminController extends AbstractController
             'album' => $album,
             'form' => $form,
             'categories' => $categoriesBdd
+        ]);
+    }
+
+    #[Route('/messages', name: 'messages_list')]
+    public function messageList(ContactRepository $contactRepository) {
+        $messages = $contactRepository->findBy([], ['createdAt' => 'DESC']);
+        return $this->render('admin/message/list.html.twig', [
+            'controller_name' => 'AdminController',
+            'messages' => $messages
+        ]);
+    }
+
+    #[Route('/messages/{id}', name: 'messages_show')]
+    public function messageDetail(Contact $contact) {
+        return $this->render('admin/message/show.html.twig', [
+            'controller_name' => 'AdminController',
+            'message' => $contact
         ]);
     }
 

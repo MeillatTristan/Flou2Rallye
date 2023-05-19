@@ -6,8 +6,17 @@
   padding: 30px;
   border-radius: 10px;
 
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
   #numberAlbums {
     width: 50%;
+
+    @media screen and (max-width: 992px) {
+      width: max-content;
+    }
 
     p {
       font-size: 1.6rem;
@@ -26,6 +35,16 @@
     display: flex;
     justify-content: flex-end;
     gap: 30px;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 992px) {
+      width: max-content;
+    }
+
+    @media screen and (max-width: 400px) {
+      justify-content: flex-start;
+      gap: 20px;
+    }
 
     .filter {
       display: flex;
