@@ -16,10 +16,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
-    #[Assert\Unique(message:"Cette email possède déjà un compte.")]
-    #[Assert\NotBlank(message: "Ce champ ne peut être vide")]
-    #[Assert\Email(message: 'L\'email {{ value }} n\'est pas valide.')]
     private ?string $email = null;
 
     #[ORM\Column]
