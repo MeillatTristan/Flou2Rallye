@@ -14,7 +14,7 @@ $('#album_multipleFile').change(async (e) => {
         const keyword = decodeURIComponent(escape(keywords[j]));
         addCategories(keyword);
       }
-    } else {
+    } else if(keywords) {
       addCategories(keywords.toString("utf8"));
     }
       
