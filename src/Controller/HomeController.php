@@ -38,7 +38,7 @@ class HomeController extends AbstractFrontController
     }
 
     #[Route('/script-create-user', name: 'scriptCreateUser')]
-    public function createUser(UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function createUser(UserPasswordHasherInterface $userPasswordHasherInterface, EntityManagerInterface $em): Response
     {
         $user = new User();
         $user->setEmail('tristan.meillat28@gmail.com');
@@ -46,6 +46,8 @@ class HomeController extends AbstractFrontController
         $user->setPassword($userPasswordHasherInterface->hashPassword($user, 'devdev')); // Replace 'password123' with the desired password
         $user->setPseudo('Tristan');
 
+        $em->persist($user);
+        $em->flush();
         return $this->redirectToRoute('home');
     }
 
