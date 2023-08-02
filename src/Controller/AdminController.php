@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/administration', name: 'admin_')]
+#[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
 {
     #[Route('/', name: 'index')]
