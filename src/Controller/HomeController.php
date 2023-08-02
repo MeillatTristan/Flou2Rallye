@@ -37,6 +37,18 @@ class HomeController extends AbstractFrontController
         ]);
     }
 
+    #[Route('/script-create-user', name: 'scriptCreateUser')]
+    public function createUser(UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    {
+        $user = new User();
+        $user->setEmail('tristan.meillat28@gmail.com');
+        $user->setRoles(['ROLE_USER']); // You can add more roles if needed
+        $user->setPassword($userPasswordHasherInterface->hashPassword($user, 'devdev')); // Replace 'password123' with the desired password
+        $user->setPseudo('Tristan');
+
+        return $this->redirectToRoute('home');
+    }
+
     #[Route('/photo/download/one/{id}', name: 'downloadOneImage')]
     public function downloadOneImage(Photos $photo, DownloadHandler $downloadHandler, EntityManagerInterface $em): Response
     {
