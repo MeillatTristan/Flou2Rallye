@@ -24,6 +24,7 @@
     "dependencies": {
         "exifr": "^7.1.3",
         "jquery": "^3.6.4",
+        "mjml": "^4.14.1",
         "owl.carousel": "^2.3.4"
     }
 }
