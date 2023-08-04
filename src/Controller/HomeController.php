@@ -16,6 +16,7 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
+use Qferrer\Mjml\Twig\MjmlExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -166,7 +167,7 @@ class HomeController extends AbstractFrontController
     }
 
     #[Route('/contact', name: 'contact')]
-    public function contact(Request $request, EntityManagerInterface $em, MailerService $mailer): Response
+    public function contact(Request $request, EntityManagerInterface $em, MailerService $mailer, MjmlExtension $mjmlRenderer): Response
     {
         $contact = new Contact;
         $contactForm = $this->createForm(ContactFormType::class, $contact);
@@ -191,7 +192,6 @@ class HomeController extends AbstractFrontController
                 'messageContact' => $contact->getMessage(),
             ];
             $templatePath = "email/email_owner_template.mjml";
-
             $mailer->sendEmail($from, $to, $subject, $templatePath, $templateData);
 
             $form_send = true;
