@@ -11,6 +11,7 @@ use App\Form\CommentAlbumType;
 use App\Form\ContactFormType;
 use App\Repository\AlbumRepository;
 use App\Repository\CategoryRepository;
+use App\Service\MailerService;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -165,7 +166,7 @@ class HomeController extends AbstractFrontController
     }
 
     #[Route('/contact', name: 'contact')]
-    public function contact(Request $request, EntityManagerInterface $em, Recaptcha3Validator $recaptcha3Validator): Response
+    public function contact(Request $request, EntityManagerInterface $em, MailerService $mailer): Response
     {
         $contact = new Contact;
         $contactForm = $this->createForm(ContactFormType::class, $contact);
@@ -178,7 +179,21 @@ class HomeController extends AbstractFrontController
             $contact->setUpdatedAt(new DateTime('now'));
             $em->persist($contact);
             $em->flush();
-            //TODO SEND EMAIL
+            
+            //envoie de l'email
+            $from = 'contact@flou2.ovh';
+            $to = 'tristan.meillat28@gmail.com';
+            $subject = 'Vous avez reçu une nouvelle demande de contact';
+            $templateData = [
+                'name' => 'Eric',
+                'nameContact' => $contact->getName(),
+                'emailContact' => $contact->getEmail(),
+                'messageContact' => $contact->getMessage(),
+            ];
+            $templatePath = "email/email_owner_template.mjml";
+
+            $mailer->sendEmail($from, $to, $subject, $templatePath, $templateData);
+
             $form_send = true;
         }
 

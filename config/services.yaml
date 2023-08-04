@@ -20,6 +20,18 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+    App\Services\MailerService:
+        autowire: true
+
+    mjml_renderer:
+        class: Qferrer\Mjml\Renderer\BinaryRenderer
+        arguments:
+        - '%kernel.project_dir%/node_modules/.bin/mjml'
+
+    Qferrer\Mjml\Twig\MjmlExtension:
+        arguments: ['@mjml_renderer']
+        tags: ['twig.extension']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
