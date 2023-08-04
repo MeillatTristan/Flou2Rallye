@@ -191,7 +191,7 @@ class HomeController extends AbstractFrontController
                 'emailContact' => $contact->getEmail(),
                 'messageContact' => $contact->getMessage(),
             ];
-            $templatePath = "email/email_owner_template.mjml";
+            $templatePath = "email/email_owner_template.twig";
             $mailer->sendEmail($from, $to, $subject, $templatePath, $templateData);
 
             $form_send = true;
