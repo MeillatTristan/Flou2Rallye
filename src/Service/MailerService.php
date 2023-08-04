@@ -23,7 +23,7 @@ class MailerService
     public function sendEmail(string $from, string $to, string $subject, string $templatePath, array $templateData = []): void
     {
         
-        $htmlContent = $this->mjmlRenderer->render($this->twig->render($templatePath, $templateData));
+        $htmlContent = $this->twig->render($templatePath, $templateData);
 
         $email = (new Email())
             ->from($from)
