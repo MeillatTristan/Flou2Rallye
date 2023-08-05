@@ -3652,6 +3652,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"file-loader@npm:6.0.0":
+  version: 6.0.0
+  resolution: "file-loader@npm:6.0.0"
+  dependencies:
+    loader-utils: ^2.0.0
+    schema-utils: ^2.6.5
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 5e242b236598154770447fe82bd6f2241a05f07f6035730ac8ebb5729ff92faaca3882c8ada84dfa0f7127cf076adcdbad5dd1ffa9a34a22ba6a7e4d253000c5
+  languageName: node
+  linkType: hard
+
 "fill-range@npm:^7.0.1":
   version: 7.0.1
   resolution: "fill-range@npm:7.0.1"
@@ -6594,6 +6606,7 @@ __metadata:
     "@symfony/webpack-encore": ^4.0.0
     core-js: ^3.23.0
     exifr: ^7.1.3
+    file-loader: 6.0.0
     jquery: ^3.6.4
     mjml: ^4.14.1
     owl.carousel: ^2.3.4

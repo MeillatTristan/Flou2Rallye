@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %}Me contacter | Flou2{% endblock %}
+{% block Description %} Photographe basé à Angers. Réservez une séance photo. Contactez-moi dès aujourd'hui {% endblock %}
+
 
 {% block body %}
   <section class="contact">
@@ -19,7 +20,7 @@
               {{ form_errors(form.name) }}
               {{ form_errors(form.email) }}
               {{ form_errors(form.message) }}
-              {{ form_widget(form.captcha) }}
+              {# {{ form_widget(form.captcha) }} #}
             </div>
           {% endif %}
           {{ form_widget(form.name) }}
@@ -34,7 +35,7 @@
       </div>
     </div>
 
-    <div class="containerImg" style="background-image: url(https://placehold.jp/1920x900.png)">
+    <div class="containerImg" style="background-image: url({{asset('build/images/IMG_contact.jpg')}})">
     
     </div>
   </section>
