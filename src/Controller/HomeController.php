@@ -181,9 +181,9 @@ class HomeController extends AbstractFrontController
             $em->persist($contact);
             $em->flush();
             
-            //envoie de l'email
+            //envoie de l'email owner
             $from = 'contact@flou2.ovh';
-            $to = 'tristan.meillat28@gmail.com';
+            $to = 'flou2rallye@gmail.com';
             $subject = 'Vous avez reçu une nouvelle demande de contact';
             $templateData = [
                 'name' => 'Eric',
@@ -192,9 +192,26 @@ class HomeController extends AbstractFrontController
                 'messageContact' => $contact->getMessage(),
             ];
             $templatePath = "email/email_owner_template.twig";
-            $mailer->sendEmail($from, $to, $subject, $templatePath, $templateData);
+            $returnMailer = $mailer->sendEmail($from, $to, $subject, $templatePath, $templateData);
 
-            $form_send = true;
+            if ($returnMailer === "ERROR_SENDING") {
+                $form_send = false;
+            } else {
+                $form_send = true;
+            }
+            
+            // envoie de l'email client
+            $from = 'contact@flou2.ovh';
+            $to = $contact->getEmail();
+            $subject = 'Votre demande de contact à bien été prise en compte';
+            $templateData = [
+                'name' => $contact->getName(),
+            ];
+            $templatePath = "email/email_client_template.twig";
+            $returnMailer = $mailer->sendEmail($from, $to, $subject, $templatePath, $templateData);
+
+            
+           
         }
 
         return $this->render('home/contact.html.twig', [
