@@ -12,6 +12,7 @@ use App\Form\UserType;
 use App\Repository\AlbumRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ContactRepository;
+use App\Repository\PhotosRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -30,6 +31,7 @@ class AdminController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
+        phpinfo();
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
         ]);
@@ -113,7 +115,7 @@ class AdminController extends AbstractController
     #[Route('/albums/modify/{id}', name: 'albums_modify')]
     public function modifyAlbum(Request $request, EntityManagerInterface $em, Album $album, CategoryRepository $categoryRepository): Response
     {
-
+        
         if ($album != null) {
             $form = $this->createForm(AlbumType::class, $album);
             $categoriesBdd = $album->getCategories();
@@ -157,6 +159,36 @@ class AdminController extends AbstractController
             'categories' => $categoriesBdd
         ]);
     }
+
+    // #[Route('/upload-album', name: 'messages_list')]
+    // public function uploadAlbum(Request $request, EntityManagerInterface $em, AlbumRepository $albumRepository, PhotosRepository $photosRepository) {
+    //     $id = $request->get('id');
+    //     $listPhotosforDelete = $request->get('listPhotosForDelete');
+    //     $listPhotosBeforeForDelete = $request->get('listPhotosBeforeForDelete');
+    //     $listToUpload = $request->get('listToUpload');
+
+    //     //on supprime les images de l'album en ayant la liste au chargement de la page et la liste update à la sauvegarde
+        
+    //     if (!empty($id)) { // modify
+    //         $album = $albumRepository->findBy(['id' => $id])[0];
+            
+    //         if (!empty($listPhotosforDelete) && !empty($listPhotosBeforeForDelete)) {
+    //             foreach ($listPhotosBeforeForDelete as $photoBefore) {
+    //                 if (in_array($photoBefore, $listPhotosforDelete)) {
+    //                     $photoToRemove = $photosRepository->findBy(['fileName' => $photoBefore])[0];
+    //                     $album->removePhoto($photoToRemove);
+    //                 }
+    //             }
+    //         }
+
+    //         if(!empty($listToUpload)) {
+                
+    //         }
+
+    //     } else { //create
+            
+    //     }
+    // }
 
     #[Route('/messages', name: 'messages_list')]
     public function messageList(ContactRepository $contactRepository) {
