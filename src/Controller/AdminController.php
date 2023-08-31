@@ -119,6 +119,7 @@ class AdminController extends AbstractController
             $categoriesBdd = $album->getCategories();
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+                dd($album);
                 if ($form['categories']->getData() != "") {
                     $categories = explode(" ", $form['categories']->getData());
                 } else {
