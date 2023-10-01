@@ -75,9 +75,9 @@
           </div>
           <div class="containerImg">
             <picture>
-              <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_webp') }}" type="image/webp">
-              <source srcset="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_jpeg') }}" type="image/jpeg"> 
-              <img src="{{ vich_uploader_asset(firstPhoto, 'imageFile')| imagine_filter('card_album_jpeg') }}" alt="{{ firstPhoto.imageName }}">
+              <source srcset="{{ vich_uploader_asset(album, 'coverFile')| imagine_filter('banner_webp') }}" type="image/webp">
+              <source srcset="{{ vich_uploader_asset(album, 'coverFile')| imagine_filter('banner_jpeg') }}" type="image/jpeg"> 
+              <img src="{{ vich_uploader_asset(album, 'coverFile')| imagine_filter('banner_jpeg') }}" alt="{{ album.coverName }}">
             </picture>
             <div class="layer"></div>
           </div>
