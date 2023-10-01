@@ -23,7 +23,6 @@ $('#album_multipleFile').change(async (e) => {
       $('#containerIdentite .collection-item .custom-file-input').last()[0].files = dataTransfer.files;
 
           var div = $('#containerIdentite .collection-item .previewImg').last()[0]
-          console.log(file)
           div.innerHTML = "<img class='thumbnail' src='" + URL.createObjectURL(file) + "'" +
             "title='" + file.name + "'/>" + 
             "<span class='description'>" + file.name + "</span>";

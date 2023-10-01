@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Contact;
 use App\Entity\Photos;
 use App\Entity\User;
+use App\Form\AlbumSelectionBanniereType;
 use App\Form\AlbumType;
 use App\Form\UserType;
 use App\Repository\AlbumRepository;
@@ -18,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -31,7 +33,6 @@ class AdminController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
-        phpinfo();
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
         ]);
@@ -65,12 +66,40 @@ class AdminController extends AbstractController
             'form' => $form
         ]);
     }
+
     #[Route('/albums', name: 'albums')]
     public function Album(AlbumRepository $albumRepository) {
-        $albums = $albumRepository->findAll();
+        $albums = $albumRepository->findBy(array(), array('updatedAt' => 'DESC'));
         return $this->render('admin/album/show.html.twig', [
             'controller_name' => 'AdminController',
             'albums' => $albums
+        ]);
+    }
+
+    #[Route('/albums/selected', name: 'albums_selected')]
+    public function AlbumSelected(AlbumRepository $albumRepository, Request $request, EntityManagerInterface $em) {
+        $albums = $albumRepository->findBy(array(), array('banniere' => 'DESC'));
+        $form = $this->createForm(AlbumSelectionBanniereType::class, ['selectedAlbums' => $albums]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $selectedAlbums = $form->getData()['selectedAlbums'];
+            foreach ($albums as $album) {
+                if (in_array($album, $selectedAlbums)) {
+                    $album->setBanniere(true);
+                } else {
+                    $album->setBanniere(false);
+                }
+                $em->persist($album);
+            }
+            $em->flush();
+            return $this->redirectToRoute("admin_albums_selected");
+
+        }
+        return $this->render('admin/album/selectedAlbum.html.twig', [
+            'controller_name' => 'AdminController',
+            'albums' => $albums,
+            'form' => $form
         ]);
     }
 
@@ -104,6 +133,10 @@ class AdminController extends AbstractController
             $em->flush();
 
             $this->addFlash('success','l\'album a été créé avec succès !');
+
+            return $this->redirectToRoute('admin_albums_modify', [
+                'id' => $album->getId()
+            ]);
         }
 
         return $this->render('admin/album/create.html.twig', [
@@ -160,35 +193,15 @@ class AdminController extends AbstractController
         ]);
     }
 
-    // #[Route('/upload-album', name: 'messages_list')]
-    // public function uploadAlbum(Request $request, EntityManagerInterface $em, AlbumRepository $albumRepository, PhotosRepository $photosRepository) {
-    //     $id = $request->get('id');
-    //     $listPhotosforDelete = $request->get('listPhotosForDelete');
-    //     $listPhotosBeforeForDelete = $request->get('listPhotosBeforeForDelete');
-    //     $listToUpload = $request->get('listToUpload');
+    #[Route('/album/delete/{id}', name: 'albums_delete')]
+    public function deleteAlbum(Album $album, EntityManagerInterface $em) {
+        if (!empty($album)) {
+            $em->remove($album);
+            $em->flush();
+        }
 
-    //     //on supprime les images de l'album en ayant la liste au chargement de la page et la liste update à la sauvegarde
-        
-    //     if (!empty($id)) { // modify
-    //         $album = $albumRepository->findBy(['id' => $id])[0];
-            
-    //         if (!empty($listPhotosforDelete) && !empty($listPhotosBeforeForDelete)) {
-    //             foreach ($listPhotosBeforeForDelete as $photoBefore) {
-    //                 if (in_array($photoBefore, $listPhotosforDelete)) {
-    //                     $photoToRemove = $photosRepository->findBy(['fileName' => $photoBefore])[0];
-    //                     $album->removePhoto($photoToRemove);
-    //                 }
-    //             }
-    //         }
-
-    //         if(!empty($listToUpload)) {
-                
-    //         }
-
-    //     } else { //create
-            
-    //     }
-    // }
+        return $this->redirectToRoute('admin_albums');
+    }
 
     #[Route('/messages', name: 'messages_list')]
     public function messageList(ContactRepository $contactRepository) {

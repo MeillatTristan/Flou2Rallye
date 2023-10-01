@@ -29,6 +29,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        
                                         <table class="table table-responsive-sm mb-0">
                                             <thead>
                                             <tr>
@@ -51,12 +52,21 @@
                                                         <td class="recent-stats d-flex align-items-center"><i class="fa fa-circle text-success mr-1"></i>En ligne</td>
                                                     {% endif %}
 
-                                                    <td>
+                                                    <td class="">
 
 
                                                             {# {# <a id="btn-update" href="{{ path('app_outils_update',{id:outil.id}) }}" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-hand-o-up"></i></a> #}
 
-                                                            <a id="btn-update" href="{{ path('admin_albums_modify',{id:album.id }) }}" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                                                            <div class="action">
+                                                                <a id="btn-update" href="{{ path('admin_albums_modify',{id:album.id }) }}" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                                                                <form method="post" action="{{ path('admin_albums_delete', {'id': album.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ?');">
+                                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ album.id) }}">
+                                                                    <button type="submit" class="btn btn-danger shadow btn-xs sharp mr-1" title="Supprimer">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+
 
 
                                                             {# <a id="btn-delete" href="#" onclick="event.preventDefault();confirm('Are you sure ?') &&

@@ -1,0 +1,142 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}Albums{% endblock %}
+
+{% block body %}
+
+
+    <div class="content-body">
+        <!-- row -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-9 col-xxl-12">
+                    <div class="row">
+
+                        <div class="col-xl-12 col-xxl-12 col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header border-0 pb-0">
+                                    <h4 class="card-title">Albums</h4>
+                                    <div class="input-group rounded col-md-2">
+
+                                        <input id="myInput3"  onkeyup="myFunction('myTBODY3','myInput3')" class="form-control border-start" type="search" placeholder="Rechercher" aria-label="Search">
+
+                                    </div>
+                                </div>
+
+                                {{ form_start(form) }}
+
+                                <div class="card-header border-0 pb-2">
+                                    <input class="btn btn-primary btn-block submitButton" type="submit"  value="Sauvegarder les bannières" />
+                                </div>
+                                
+                                <div class="card-body">
+                                    <div class="alert alert-light solid">
+                                        <div class="card_help">
+                                        <div class="card_help_r">
+                                            <i class="fa fa-question-circle"></i>
+                                        </div>
+                                        <div class="card_help_l">
+                                            <h5 class="mt-1 mb-2">Info!</h5>
+                                            <p>
+                                            Vous pouvez choisir jusqu'à 3 albums en bannière de la page d'accueil
+                                            <br>
+                                            Vous ne pourrez pas sauvegarder tant qu'il y en aura plus de 3 albums en bannière
+                                            <br>
+                                            </p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div id="alertTooMuchSelected" class="alert alert-danger solid d-none">
+                                      <div class="card_help">
+                                        <div class="card_help_r">
+                                          <i class="fa fa-question-circle"></i>
+                                        </div>
+                                        <div class="card_help_l">
+                                          <h5 class="mt-1 mb-2 text-white">Attention!</h5>
+                                          <p>
+                                            Il est impossible de sauvegarder tant que plus de 3 albums ont été selectionnés
+                                            <br>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        
+                                        <table class="table table-responsive-sm mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th><strong>ALBUM EN BANNIERE</strong></th>
+                                                <th><strong>NOM DE L'ALBUM</strong></th>
+                                                <th><strong>PRIVÉ</strong></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="myTBODY3">
+                                            {% for album in albums %}
+                                                <tr>
+
+                                                    <td><b>{{ form_widget(form.selectedAlbums[loop.index-1].banniere) }}</b></td>
+                                                    <td><b>{{  album.name | capitalize}}</b></td>
+
+                                                    {% if album.private %}
+                                                        <td class="recent-stats d-flex align-items-center"><i class="fa fa-circle text-warning mr-1"></i>Privé</td>
+                                                        
+                                                    {% else %}
+                                                        <td class="recent-stats d-flex align-items-center"><i class="fa fa-circle text-success mr-1"></i>En ligne</td>
+                                                    {% endif %}
+                                                </tr>
+                                            {% endfor %}
+
+
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                                </div>
+                                <div class="card-header border-0 pb-2">
+                                    <input class="btn btn-primary btn-block submitButton" type="submit"  value="Sauvegarder les bannières" />
+                                </div>
+                                {{ form_end(form) }}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Récupérez tous les éléments de case à cocher qui ont un nom correspondant au modèle des cases à cocher Symfony
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name^="album_selection_banniere[selectedAlbums]"]');
+
+        // Récupérez le bouton de soumission
+        const submitButtons = document.getElementsByClassName('submitButton');
+
+        const alert = document.getElementById('alertTooMuchSelected');
+
+        // Écoutez les changements de case à cocher
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const selectedCheckboxes = document.querySelectorAll('input[type="checkbox"][name^="album_selection_banniere[selectedAlbums]"]:checked');
+                
+                // Désactivez le bouton si plus de 3 cases sont cochées, sinon activez-le
+                for (let i = 0; i < submitButtons.length; i++) {
+                    const submitButton = submitButtons[i];
+                    if (selectedCheckboxes.length > 3) {
+                        submitButton.disabled = true;
+                        alert.classList.remove('d-none')
+                    } else {    
+                        submitButton.disabled = false;
+                        alert.classList.add('d-none')
+                    }
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}
+

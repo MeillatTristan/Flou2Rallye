@@ -45216,7 +45216,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 .multipleFileIv {
   position: relative;
-  width: 180px;
+  width: 190px;
   height: 40px;
   cursor: pointer;
 }
@@ -45243,11 +45243,9 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   bottom: 0;
   opacity: 1;
   background-color: #823e91;
-  color: transparent;
+  color: transparent !important;
   border-radius: 10px;
   cursor: pointer;
-
-
 }
 
 .multipleFileIv .custom-file-label::after {
@@ -45264,6 +45262,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   cursor: pointer;
   width: max-content;
   height: max-content;
+  font-size: 14px;
 }
 
 .previewImg {
@@ -45281,15 +45280,15 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   width: 100%;
 }
 
-.vich-image {
+.collection-item .vich-image {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-.vich-image .custom-file-input,
-.vich-image .custom-file-label {
+.collection-item .vich-image .custom-file-input,
+.collection-item .vich-image .custom-file-label {
   opacity: 0;
   width: 0;
   height: 0;
@@ -45372,5 +45371,10 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 #containerCategories .category .close:hover i {
   transform: rotate(180deg);
+}
+
+.coverFileContainer a img {
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 /*# sourceMappingURL=style.css.map */

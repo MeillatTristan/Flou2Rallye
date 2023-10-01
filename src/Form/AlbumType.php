@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AlbumType extends AbstractType
 {
@@ -32,7 +33,7 @@ class AlbumType extends AbstractType
             ->add('multipleFile', FileType::class, [
                 'mapped' => false,
                 'required' => false,
-                'label' => "ajout de plusieurs photos",
+                'label' => "Ajout de plusieurs photos",
                 'multiple' => true,
             ])
             ->add('photos', CollectionType::class, [
@@ -45,6 +46,16 @@ class AlbumType extends AbstractType
                     'label' => false
                 ]
             ])
+            ->add('coverFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'download_label' => 'Télécharger',
+                'download_uri' => true,
+                'image_uri' => true,
+                'imagine_pattern' => 'thumb_edit_album',
+                'asset_helper' => true,
+                'label' => "Ajout de la photo de bannière"
+            ]);
         ;
     }
 

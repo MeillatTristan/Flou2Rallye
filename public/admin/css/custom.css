@@ -2,7 +2,12 @@
 .btn-primary {
     background-color: #823e91;
     border-color: #823e91;
+    color: white !important;
+}
 
+.btn-primary:disabled {
+    background-color: rgb(167, 92, 184);
+    border-color: rgb(167, 92, 184);
 }
 #btn-create:hover,
 .btn-primary:hover {
@@ -134,3 +139,13 @@
     text-align: center;
 }
 
+#myTBODY3 .action {
+    display: flex;
+}
+
+#containerFormAlbum label,
+#containerFormAlbum legend {
+    font-size: 16px;
+    font-weight: 600;
+    color: #423a44;
+}

@@ -10,7 +10,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-9 col-xxl-12">
-                    <div class="row containerFormAlbum">
+                    <div class="row containerFormAlbum" id="containerFormAlbum">
+                    
                         {{ form_start(form) }}
                         <div class="col-xl-12 col-xxl-12 col-lg-12 col-md-12">
                           <div class="card">
@@ -41,6 +42,9 @@
                                     {{ form_widget(form.name)}}
                                   </div>
                                   <div class="form-group">
+                                    
+
+                                    {{ form_label(form.categories)}}
                                     <div class="alert alert-light solid">
                                       <div class="card_help">
                                         <div class="card_help_r">
@@ -58,7 +62,7 @@
                                       </div>
                                     </div>
 
-                                    {{ form_label(form.categories)}}
+                                    
                                     <div id="containerCategories"></div>
                                     <input type="text" id="addCategories" class="form-control"
                                       {% if album is defined %}
@@ -72,8 +76,22 @@
                                     {{ form_label(form.private)}}
                                     {{ form_widget(form.private)}}
                                   </div>
-                                  <div id="previewPhotos" class="previewPhotos">
-                                    
+                                  <div class="form-group coverFileContainer">
+                                    {{ form_label(form.coverFile)}}
+                                    <div class="alert alert-light solid">
+                                      <div class="card_help">
+                                        <div class="card_help_r">
+                                          <i class="fa fa-question-circle"></i>
+                                        </div>
+                                        <div class="card_help_l">
+                                          <h5 class="mt-1 mb-2">Info!</h5>
+                                          <p>
+                                            La taille recommandé est de 2000px de large minimum et 500px de hauteur minimum
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {{ form_widget(form.coverFile)}}
                                   </div>
                                   <div class="form-group">
                                     <div class="multipleFileIv">
