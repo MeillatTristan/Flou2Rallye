@@ -54,7 +54,7 @@ class Album
     #[Vich\UploadableField(mapping: 'photos', fileNameProperty: 'coverName')]
     private ?File $coverFile = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ["default" => 0], nullable: true)]
     private ?bool $banniere = null;
 
 
