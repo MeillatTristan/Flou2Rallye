@@ -123,6 +123,7 @@ class HomeController extends AbstractFrontController
     {
         
         $albums = $albumRepository->findBy([], ['createdAt' => 'DESC']);
+        $valueSearch = str_replace(['.', ' '], '', strtolower($valueSearch));
         return $this->render('home/albums.html.twig', [
             'controller_name' => 'HomeController',
             'albums' => $albums,
