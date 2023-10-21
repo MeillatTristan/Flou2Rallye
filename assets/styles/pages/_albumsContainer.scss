@@ -20,6 +20,10 @@
   &::after {
     content: "";
     flex: auto;
+
+    @media screen and (max-width: 570px) {
+      display: none;
+    }
   }
 
   .cardAlbum.hide {

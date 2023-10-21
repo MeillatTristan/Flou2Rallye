@@ -74,8 +74,16 @@
       display: flex;
       justify-content: space-between;
 
+      @media screen and (max-width: 1200px) {
+        flex-direction: column;
+      }
+
       .comments {
         width: 60%;
+
+        @media screen and (max-width: 1200px) {
+          width: 100%;
+        }
 
   
         .noComment {
@@ -142,6 +150,14 @@
   
       .formComment {
         width: 35%;
+
+        @media screen and (max-width: 1200px) {
+          width: 100%;
+        }
+
+        form {
+          max-width: 600px;
+        }
         
         .form-control {
           display: flex;
@@ -150,7 +166,7 @@
 
           input[type=text],
           input[type=email],
-          textarea, {
+          textarea {
             width: 100%;
           }
         }

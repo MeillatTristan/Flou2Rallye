@@ -1,0 +1,43 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.188fa053.js",
+        "/build/109.0369ad0d.js",
+        "/build/app.6fa156e3.js"
+      ]
+    },
+    "home": {
+      "js": [
+        "/build/runtime.188fa053.js",
+        "/build/109.0369ad0d.js",
+        "/build/135.7e93f19d.js",
+        "/build/440.6c4c548e.js",
+        "/build/home.c5ad65cf.js"
+      ]
+    },
+    "allAlbums": {
+      "js": [
+        "/build/runtime.188fa053.js",
+        "/build/109.0369ad0d.js",
+        "/build/135.7e93f19d.js",
+        "/build/allAlbums.bd77222b.js"
+      ]
+    },
+    "detailAlbum": {
+      "js": [
+        "/build/runtime.188fa053.js",
+        "/build/109.0369ad0d.js",
+        "/build/detailAlbum.4e715037.js"
+      ]
+    },
+    "appScss": {
+      "js": [
+        "/build/runtime.188fa053.js"
+      ],
+      "css": [
+        "/build/appScss.2f520975.css"
+      ]
+    }
+  }
+}
