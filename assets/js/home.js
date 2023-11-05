@@ -8,8 +8,8 @@ $(document).ready(function(){
     loop:false,
     margin:10,
     nav:false,
-    dot:false,
-    autoplay:true,
+    dot:true,
+    autoplay:false,
     autoplayTimeout:8000,
     autoplayHoverPause:false,
     responsive:{

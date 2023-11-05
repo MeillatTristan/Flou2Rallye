@@ -41,6 +41,10 @@ h2 {
   padding: 0 150px;
   padding-top: 150px;
 
+  &.lastHomepage {
+    padding-bottom: 150px;
+  }
+
   @media screen and (max-width: 1200px) {
     padding: 0 100px;
     padding-top: 150px;
@@ -54,5 +58,9 @@ h2 {
   @media screen and (max-width: 768px) {
     padding: 0 10px;
     padding-top: 100px;
+    padding-bottom: 100px;
+
   }
 }
+
+

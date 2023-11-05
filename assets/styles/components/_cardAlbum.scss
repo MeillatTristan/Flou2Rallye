@@ -153,6 +153,31 @@
   }
 }
 
+.owl-carousel.albums {
+  .owl-dots {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+
+    .owl-dot {
+      background-color: $primary-color-white-50;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      transition: 0.5s all ease-in;
+
+      &.active {
+        background-color: $primary-color;
+      }
+    }
+  }
+}
+
 .owl-carousel.albums .owl-item {
   @media screen and (max-width: 768px) {
     display: flex;
