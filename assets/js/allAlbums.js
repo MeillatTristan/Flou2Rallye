@@ -15,11 +15,11 @@ if (document.getElementById('paginationContainer')) {
   var albumsContainer = document.getElementById("albumsContainer");
   var albumsNoSearch = [].slice.call(albumsContainer.children);
   var searchValueOtherPage = document.getElementById('searchValue').dataset.value;
-  
+  var form = document.querySelector('#searchbar form')
   var searchInProgress = false;
 
 
-  sendSearch.addEventListener('submit', (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
   })
 
