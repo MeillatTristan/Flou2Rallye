@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ album.name }} | Flou2Rallye{% endblock %}
-{% block Description %} Retrouvez les photos de l'album {{ album.name }}  {% endblock %}
+{% block description %} Retrouvez les photos de l'album {{ album.name }}  {% endblock %}
 
 {% block body %}
 {% set firstPhoto = album.photos|first %}
