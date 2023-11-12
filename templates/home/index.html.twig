@@ -46,7 +46,7 @@
   <div class="owl-carousel albums">
     {% set count = 0 %}
     {% for album in albums %}
-      {% if album.private == true or app.user %}
+      {% if album.private == false or app.user %}
         {% if count <= 10 %}
           {% set firstPhoto = album.photos|first %}
           <a href='{{ path('albums_detail', {'id': album.id}) }}' class="cardAlbum">
@@ -97,7 +97,7 @@
   <div class="owl-carousel albums">
     {% set count = 0 %}
     {% for album in albums|sort((a, b) => a.save <=> b.save)|reverse %}
-    {% if album.private == true or app.user %}
+    {% if album.private == false or app.user %}
       {% if count <= 10 %}
         {% set firstPhoto = album.photos|first %}
         <a href='{{ path('albums_detail', {'id': album.id}) }}' class="cardAlbum">

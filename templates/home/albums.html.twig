@@ -66,7 +66,7 @@
   </div>
   <div class="cardsContainer" id="albumsContainer">
     {% for album in albums %}
-        {% if album.private == true or app.user %}
+        {% if album.private == false or app.user %}
           {% set firstPhoto = album.photos|first %}
           <a href='{{ path('albums_detail', {'id': album.id}) }}' class="cardAlbum" data-recent="{{ album.createdAt|date('U') }}" data-popularite="{{ album.save }}" data-title="{{ album.name }}" data-categories="{% for category in album.categories %}{{ category.name }} {% endfor %}">
           
